@@ -2,19 +2,20 @@ defmodule Weather.NWSWeather do
 
   @user_agent [ {"User-agent", "Elixir test@test.test"} ]
 
-  @nws_url Application.get env(:weather, :nws_url)
+  @nws_url Application.get_env(:weather, :nws_url)
 
   require Logger
 
   def fetch(location) do
     Logger.info("Fetching weather for location: #{location}")
-    xml_url
+    location
+    |> xml_url
     |> HTTPoison.get(@user_agent)
     |> handle_response
   end
 
   def xml_url(location) do
-    "#{nws_url}/xml/current_obs/#{location}.xml"
+    "#{@nws_url}/xml/current_obs/#{location}.xml"
   end
 
   def handle_response({:ok, %{status_code: 200, body: body}}) do

@@ -1,7 +1,14 @@
 defmodule WeatherTest do
   use ExUnit.Case
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  import Weather.CLI, only: [ parse_args: 1 ]
+
+  test ":help returned by option parsing with -h and --help options" do
+    assert parse_args(["-h",     "anything"]) == :help
+    assert parse_args(["--help", "anything"]) == :help
+  end
+
+  test "location value returned if given" do
+    assert parse_args(["location"]) == { "location" }
   end
 end

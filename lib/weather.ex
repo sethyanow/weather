@@ -1,11 +1,11 @@
 defmodule Weather do
 
   def find_location({lat, long}) do
-    [0]
+    [lat,long]
   end
 
   def find_location(zip) do
-    [0]
+    [zip]
   end
 
 end

@@ -34,7 +34,9 @@ defmodule Weather.Mixfile do
       { :httpoison, "~> 0.6" },
       { :jsx      , "~> 2.6" },
       { :ex_doc   , github: "elixir-lang/ex_doc" },
-      { :earmark  , ">= 0.0.0" }
+      { :earmark  , ">= 0.0.0" },
+      #{ :erlsom   , "~> 1.2.1"},
+      { :exml     , github: "expelledboy/exml"}
     ]
   end
 

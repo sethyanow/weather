@@ -1,8 +1,14 @@
+
+
 defmodule Weather.NWSWeather do
 
   @user_agent [ {"User-agent", "Elixir test@test.test"} ]
 
   @nws_url Application.get_env(:weather, :nws_url)
+
+  require Record
+  Record.defrecord :xmlElement, Record.extract(:xmlElement, from_lib: "xmerl/include/xmerl.hrl")
+  Record.defrecord :xmlText, Record.extract(:xmlText, from_lib: "xmerl/include/xmerl.hrl")
 
   require Logger
 
@@ -18,10 +24,17 @@ defmodule Weather.NWSWeather do
     "#{@nws_url}/xml/current_obs/#{location}.xml"
   end
 
+  def get_temp(data) do
+    data |> Exml.get "//current_observation/temperature_string"
+  end
+
+
   def handle_response({:ok, %{status_code: 200, body: body}}) do
     Logger.info "Successful response"
     Logger.debug fn -> inspect(body) end
-    { :ok, :jsx.decode(body) }
+    result = body
+      |> Exml.parse
+    { :ok, result}
   end
 
 
@@ -31,7 +44,7 @@ defmodule Weather.NWSWeather do
 
   def handle_response({_, %{status_code: status, body: body}}) do
     Logger.error "Error #{status} returned"
-    { :error, :jsx.decode(body) }
+    { :error, :erlang.bitstring_to_list(body) }
   end
 
 

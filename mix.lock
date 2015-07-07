@@ -1,5 +1,7 @@
 %{"earmark": {:hex, :earmark, "0.1.17"},
+  "erlsom": {:hex, :erlsom, "1.2.1"},
   "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "f319194c10d35139f19778386da2366d454bf0a9", []},
+  "exml": {:git, "git://github.com/expelledboy/exml.git", "64ad796d5637c81168c8109a53bcc300b73825ea", []},
   "hackney": {:hex, :hackney, "1.2.0"},
   "httpoison": {:hex, :httpoison, "0.7.0"},
   "idna": {:hex, :idna, "1.0.2"},
